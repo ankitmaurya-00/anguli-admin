@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL?.trim() || 'https://anguli-backend.onrender.com/api';
+let API_URL = process.env.NEXT_PUBLIC_API_URL?.trim() || 'https://anguli-backend.onrender.com/api';
+if (typeof API_URL === 'string') {
+  API_URL = API_URL.replace(/\/+$/, '');
+  if (!API_URL.endsWith('/api')) API_URL += '/api';
+}
 
 const api = axios.create({ baseURL: API_URL });
 
