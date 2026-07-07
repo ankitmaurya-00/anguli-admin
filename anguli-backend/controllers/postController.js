@@ -135,7 +135,7 @@ exports.updatePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ success: false, message: 'Post not found' });
-    if (post.author.toString() !== req.user._id.toString() && req.user.role === 'user') {
+    if (post.author.toString() !== req.user._id.toString()) {
       return res.status(403).json({ success: false, message: 'Not authorized to edit this post' });
     }
 
@@ -144,7 +144,11 @@ exports.updatePost = async (req, res, next) => {
     post.editedAt = new Date();
     await post.save();
 
-    res.json({ success: true, post });
+    const updatedPost = await Post.findById(post._id)
+      .populate('author', 'name profilePicture village')
+      .populate('village', 'name slug');
+
+    res.json({ success: true, post: updatedPost });
   } catch (error) {
     next(error);
   }
@@ -156,7 +160,7 @@ exports.deletePost = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ success: false, message: 'Post not found' });
-    if (post.author.toString() !== req.user._id.toString() && req.user.role === 'user') {
+    if (post.author.toString() !== req.user._id.toString()) {
       return res.status(403).json({ success: false, message: 'Not authorized to delete this post' });
     }
 

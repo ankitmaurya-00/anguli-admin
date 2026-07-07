@@ -19,7 +19,7 @@ const PostDetail = () => {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 space-y-4">
-      <PostCard post={post} />
+      <PostCard post={post} onUpdate={setPost} />
       <CommentSection postId={post._id} />
     </div>
   );
