@@ -36,7 +36,12 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await register(form);
+      // Convert empty strings for optional location fields to undefined so backend won't receive empty strings
+      const payload = { ...form };
+      ['state', 'district', 'village'].forEach((k) => {
+        if (!payload[k]) delete payload[k];
+      });
+      await register(payload);
       toast.success('Account created! Welcome to Anguli.in');
       navigate('/feed');
     } catch (err) {

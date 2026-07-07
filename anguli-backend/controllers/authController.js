@@ -1,6 +1,9 @@
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const User = require('../models/User');
 const Village = require('../models/Village');
+const District = require('../models/District');
+const State = require('../models/State');
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE || '30d' });
@@ -43,14 +46,35 @@ exports.register = async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Email already registered' });
     }
 
-    if (village) {
-      const villageDoc = await Village.findById(village);
-      if (!villageDoc) {
-        return res.status(400).json({ success: false, message: 'Invalid village selected' });
-      }
+    // Validate optional location IDs if provided
+    let stateDoc = null;
+    let districtDoc = null;
+    let villageDoc = null;
+
+    if (state !== undefined) {
+      if (!mongoose.Types.ObjectId.isValid(state)) return res.status(400).json({ success: false, message: 'Invalid state selected' });
+      stateDoc = await State.findById(state);
+      if (!stateDoc) return res.status(400).json({ success: false, message: 'Invalid state selected' });
     }
 
-    const user = await User.create({ name, email, password, village, district, state });
+    if (district !== undefined) {
+      if (!mongoose.Types.ObjectId.isValid(district)) return res.status(400).json({ success: false, message: 'Invalid district selected' });
+      districtDoc = await District.findById(district);
+      if (!districtDoc) return res.status(400).json({ success: false, message: 'Invalid district selected' });
+    }
+
+    if (village !== undefined) {
+      if (!mongoose.Types.ObjectId.isValid(village)) return res.status(400).json({ success: false, message: 'Invalid village selected' });
+      villageDoc = await Village.findById(village);
+      if (!villageDoc) return res.status(400).json({ success: false, message: 'Invalid village selected' });
+    }
+
+    const createPayload = { name, email, password };
+    if (stateDoc) createPayload.state = state;
+    if (districtDoc) createPayload.district = district;
+    if (villageDoc) createPayload.village = village;
+
+    const user = await User.create(createPayload);
 
     const token = generateToken(user._id);
     res.status(201).json({ success: true, token, user: sanitizeUser(user) });

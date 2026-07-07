@@ -40,7 +40,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (payload) => {
-    const res = await api.post('/auth/register', payload);
+    // sanitize optional location fields: if blank or not provided, omit them
+    const data = { ...payload };
+    ['state', 'district', 'village'].forEach((k) => {
+      if (!data[k]) delete data[k];
+    });
+    const res = await api.post('/auth/register', data);
     localStorage.setItem('anguli_token', res.data.token);
     localStorage.setItem('anguli_user', JSON.stringify(res.data.user));
     setUser(res.data.user);
