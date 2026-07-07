@@ -6,6 +6,14 @@ const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const handleBookmarkUpdate = (bookmarkId, updatedPost) => {
+    setBookmarks((prev) =>
+      updatedPost
+        ? prev.map((item) => (item._id === bookmarkId ? { ...item, post: updatedPost } : item))
+        : prev.filter((item) => item._id !== bookmarkId)
+    );
+  };
+
   useEffect(() => {
     api.get('/posts/bookmarks/me').then((res) => setBookmarks(res.data.bookmarks)).finally(() => setLoading(false));
   }, []);
@@ -21,7 +29,7 @@ const Bookmarks = () => {
       ) : (
         <div className="space-y-4">
           {bookmarks.filter((b) => b.post).map((b) => (
-            <PostCard key={b._id} post={b.post} />
+            <PostCard key={b._id} post={b.post} onUpdate={(updatedPost) => handleBookmarkUpdate(b._id, updatedPost)} />
           ))}
         </div>
       )}

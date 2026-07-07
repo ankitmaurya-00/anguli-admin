@@ -10,6 +10,14 @@ const VillageDetail = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const handlePostUpdate = (postId, updatedPost) => {
+    setPosts((prev) =>
+      updatedPost
+        ? prev.map((item) => (item._id === postId ? updatedPost : item))
+        : prev.filter((item) => item._id !== postId)
+    );
+  };
+
   useEffect(() => {
     setLoading(true);
     api
@@ -66,7 +74,7 @@ const VillageDetail = () => {
       ) : (
         <div className="space-y-4">
           {posts.map((p) => (
-            <PostCard key={p._id} post={p} />
+            <PostCard key={p._id} post={p} onUpdate={(updatedPost) => handlePostUpdate(p._id, updatedPost)} />
           ))}
         </div>
       )}

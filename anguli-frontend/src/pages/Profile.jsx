@@ -91,7 +91,9 @@ const Profile = () => {
           <p className="text-gray-500 text-center py-10 bg-white rounded-xl border border-gray-100">No posts yet.</p>
         ) : (
           <div className="space-y-4">
-            {posts.map((p) => <PostCard key={p._id} post={p} />)}
+            {posts.map((p) => (
+              <PostCard key={p._id} post={p} onUpdate={loadProfile} />
+            ))}
           </div>
         )
       )}

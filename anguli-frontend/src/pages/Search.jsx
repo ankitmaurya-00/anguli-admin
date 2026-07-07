@@ -11,6 +11,14 @@ const Search = () => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const handlePostUpdate = (postId, updatedPost) => {
+    setResults((prev) =>
+      updatedPost
+        ? prev.map((item) => (item._id === postId ? updatedPost : item))
+        : prev.filter((item) => item._id !== postId)
+    );
+  };
+
   const runSearch = (q, t) => {
     setLoading(true);
     api
@@ -92,7 +100,7 @@ const Search = () => {
       ) : (
         <div className="space-y-4">
           {results.map((p) => (
-            <PostCard key={p._id} post={p} />
+            <PostCard key={p._id} post={p} onUpdate={(updatedPost) => handlePostUpdate(p._id, updatedPost)} />
           ))}
         </div>
       )}
