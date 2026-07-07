@@ -2,13 +2,18 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME?.trim();
+const apiKey = process.env.CLOUDINARY_API_KEY?.trim();
+const apiSecret = process.env.CLOUDINARY_API_SECRET?.trim();
+
 cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+  cloud_name: cloudName,
+  api_key: apiKey,
+  api_secret: apiSecret,
+  secure: true,
 });
 
-if (!process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET) {
+if (!cloudName || !apiKey || !apiSecret) {
   console.warn('Cloudinary is not fully configured for admin backend. Please set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET.');
 }
 
@@ -17,11 +22,11 @@ const postMediaStorage = new CloudinaryStorage({
   cloudinary,
   params: async (req, file) => ({
     folder: 'anguli/posts',
-    resource_type: file.mimetype.startsWith('video') ? 'video' : 'image',
+    resource_type: 'auto',
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'mp4', 'mov', 'webm'],
-    transformation: file.mimetype.startsWith('video')
-      ? undefined
-      : [{ width: 1600, crop: 'limit', quality: 'auto' }],
+    transformation: file.mimetype.startsWith('image/')
+      ? [{ width: 1600, crop: 'limit', quality: 'auto' }]
+      : undefined,
   }),
 });
 

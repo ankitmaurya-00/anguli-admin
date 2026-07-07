@@ -29,7 +29,7 @@ const Feed = () => {
   }, [feedType, page]);
 
   const handlePostCreated = (newPost) => {
-    setPosts([newPost, ...posts]);
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 
   return (
