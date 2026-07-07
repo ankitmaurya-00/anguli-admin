@@ -26,7 +26,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold text-gray-800 mb-1">Anguli.in Admin</h1>
-        <p className="text-gray-500 text-sm mb-6">Admin panel me login karein</p>
+        <p className="text-gray-500 text-sm mb-6">Log in to the admin panel</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

@@ -19,9 +19,9 @@ const Home = () => {
       {/* Hero */}
       <section className="bg-gradient-to-br from-primary-700 to-primary-600 text-white">
         <div className="max-w-6xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">Aapka Shahar, Aapki Pehchan</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">Your Town, Your Identity</h1>
           <p className="text-primary-100 max-w-xl mx-auto mb-8">
-            Apne gaon aur district ki directory dhoondhein, community se judein, aur apni awaz share karein.
+            Find your village or district, connect with your community, and share local updates.
           </p>
           <form
             onSubmit={(e) => {
@@ -33,7 +33,7 @@ const Home = () => {
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Apna gaon ya district search karein..."
+              placeholder="Search your village or district..."
               className="flex-1 px-5 py-3 text-gray-800 outline-none"
             />
             <button type="submit" className="bg-accent-500 hover:bg-accent-600 text-white px-6 flex items-center gap-2 font-medium">
@@ -45,7 +45,7 @@ const Home = () => {
 
       {/* States quick links */}
       <section className="max-w-6xl mx-auto px-4 py-10">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">States Browse Karein</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Browse States</h2>
         <div className="flex flex-wrap gap-3">
           {states.map((s) => (
             <Link
@@ -68,7 +68,7 @@ const Home = () => {
           </Link>
         </div>
         {featuredVillages.length === 0 ? (
-          <p className="text-gray-500 text-sm">Jald hi featured villages yahan dikhengi.</p>
+          <p className="text-gray-500 text-sm">Featured villages will appear here soon.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {featuredVillages.map((v) => (
@@ -82,10 +82,10 @@ const Home = () => {
       <section className="bg-accent-500 text-white">
         <div className="max-w-6xl mx-auto px-4 py-14 text-center">
           <FiUsers size={40} className="mx-auto mb-3" />
-          <h2 className="text-2xl font-bold mb-2">Apni Community Se Judein</h2>
-          <p className="mb-6 text-accent-50">Posts share karein, apne gaon walon se connect karein, aur updates paayein.</p>
+          <h2 className="text-2xl font-bold mb-2">Connect with Your Community</h2>
+          <p className="mb-6 text-accent-50">Share posts, connect with neighbors, and stay updated.</p>
           <Link to="/register" className="bg-white text-accent-600 font-semibold px-6 py-3 rounded-full hover:bg-gray-100">
-            Free Me Join Karein
+            Join for Free
           </Link>
         </div>
       </section>

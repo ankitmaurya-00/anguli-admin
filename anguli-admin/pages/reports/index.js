@@ -54,7 +54,7 @@ export default function Reports() {
         {loading ? (
           <p className="text-center text-gray-400 py-10">Loading...</p>
         ) : reports.length === 0 ? (
-          <p className="text-center text-gray-400 py-10">Koi report nahi hai</p>
+          <p className="text-center text-gray-400 py-10">No reports</p>
         ) : (
           reports.map((r) => (
             <div key={r._id} className="p-4 flex items-start justify-between gap-4">

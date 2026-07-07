@@ -66,7 +66,7 @@ export default function Users() {
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Name ya email se search karein..."
+          placeholder="Search by name or email..."
           className="flex-1 border border-gray-200 rounded-lg px-4 py-2 outline-none focus:border-primary-500"
         />
         <button type="submit" className="bg-primary-600 text-white px-4 rounded-lg flex items-center gap-2">
@@ -90,7 +90,7 @@ export default function Users() {
             {loading ? (
               <tr><td colSpan={6} className="px-4 py-6 text-center text-gray-400">Loading...</td></tr>
             ) : users.length === 0 ? (
-              <tr><td colSpan={6} className="px-4 py-6 text-center text-gray-400">Koi user nahi mila</td></tr>
+              <tr><td colSpan={6} className="px-4 py-6 text-center text-gray-400">No users found</td></tr>
             ) : (
               users.map((u) => (
                 <tr key={u._id}>

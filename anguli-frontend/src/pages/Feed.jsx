@@ -62,7 +62,7 @@ const Feed = () => {
           ))}
         </div>
       ) : posts.length === 0 ? (
-        <p className="text-gray-500 text-center py-16">Koi post nahi hai abhi. Sabse pehle post karein!</p>
+        <p className="text-gray-500 text-center py-16">No posts yet. Be the first to post!</p>
       ) : (
         <div className="space-y-4">
           {posts.map((p) => (

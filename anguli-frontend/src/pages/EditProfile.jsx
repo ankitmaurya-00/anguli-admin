@@ -52,7 +52,7 @@ const EditProfile = () => {
       toast.success('Profile update ho gaya!');
       navigate(`/profile/${user._id}`);
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Update nahi ho paya');
+      toast.error(err.response?.data?.message || 'Update failed');
     } finally {
       setSaving(false);
     }

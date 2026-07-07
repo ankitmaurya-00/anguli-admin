@@ -82,7 +82,7 @@ export default function PostsModeration() {
         {loading ? (
           <p className="text-center text-gray-400 py-10">Loading...</p>
         ) : posts.length === 0 ? (
-          <p className="text-center text-gray-400 py-10">Koi post nahi hai</p>
+          <p className="text-center text-gray-400 py-10">No posts</p>
         ) : (
           posts.map((p) => (
             <div key={p._id} className="p-4 flex items-start justify-between gap-4">

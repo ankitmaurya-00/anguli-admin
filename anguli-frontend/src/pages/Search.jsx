@@ -42,7 +42,7 @@ const Search = () => {
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Village, user ya post search karein..."
+          placeholder="Search village, user, or post..."
           className="flex-1 border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500"
         />
         <button type="submit" className="bg-primary-600 text-white px-5 rounded-lg flex items-center gap-2 font-medium hover:bg-primary-700">
@@ -67,7 +67,7 @@ const Search = () => {
       {loading ? (
         <p className="text-gray-500 text-center py-10">Searching...</p>
       ) : results.length === 0 ? (
-        <p className="text-gray-500 text-center py-10">Koi result nahi mila. Kuch aur try karein.</p>
+        <p className="text-gray-500 text-center py-10">No results found. Try a different search.</p>
       ) : type === 'villages' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {results.map((v) => (

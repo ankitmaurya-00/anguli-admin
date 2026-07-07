@@ -27,7 +27,7 @@ export default function MasterData() {
       setDistricts(d.data.districts);
       setVillages(v.data.villages);
     } catch (err) {
-      toast.error('Data load nahi hua');
+      toast.error('Failed to load data');
     } finally {
       setLoading(false);
     }
@@ -53,11 +53,11 @@ export default function MasterData() {
         if (editing) await api.put(`/admin/states/${editing._id}`, form);
         else await api.post('/admin/states', form);
       } else if (tab === 'districts') {
-        if (!form.state) return toast.error('State select karein');
+        if (!form.state) return toast.error('Please select a state');
         if (editing) await api.put(`/admin/districts/${editing._id}`, form);
         else await api.post('/admin/districts', form);
       } else {
-        if (!form.district) return toast.error('District select karein');
+        if (!form.district) return toast.error('Please select a district');
         if (editing) await api.put(`/admin/villages/${editing._id}`, form);
         else await api.post('/admin/villages', form);
       }
@@ -65,18 +65,18 @@ export default function MasterData() {
       closeModal();
       loadAll();
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Save nahi hua');
+      toast.error(err.response?.data?.message || 'Failed to save');
     }
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Pakka delete karna hai?')) return;
+    if (!confirm('Are you sure you want to delete?')) return;
     try {
       await api.delete(`/admin/${tab}/${id}`);
       toast.success('Deleted');
       loadAll();
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Delete nahi hua');
+      toast.error(err.response?.data?.message || 'Failed to delete');
     }
   };
 
@@ -119,7 +119,7 @@ export default function MasterData() {
             {loading ? (
               <tr><td colSpan={4} className="px-4 py-6 text-center text-gray-400">Loading...</td></tr>
             ) : currentList.length === 0 ? (
-              <tr><td colSpan={4} className="px-4 py-6 text-center text-gray-400">Koi data nahi hai</td></tr>
+              <tr><td colSpan={4} className="px-4 py-6 text-center text-gray-400">No data available</td></tr>
             ) : (
               currentList.map((item) => (
                 <tr key={item._id}>
@@ -169,7 +169,7 @@ export default function MasterData() {
                   onChange={(e) => setForm({ ...form, state: e.target.value })}
                   className="w-full border border-gray-200 rounded-lg px-4 py-2 outline-none focus:border-primary-500"
                 >
-                  <option value="">State chunein</option>
+                  <option value="">Select state</option>
                   {states.map((s) => <option key={s._id} value={s._id}>{s.name}</option>)}
                 </select>
               )}
@@ -181,7 +181,7 @@ export default function MasterData() {
                     onChange={(e) => setForm({ ...form, district: e.target.value })}
                     className="w-full border border-gray-200 rounded-lg px-4 py-2 outline-none focus:border-primary-500"
                   >
-                    <option value="">District chunein</option>
+                    <option value="">Select district</option>
                     {districts.map((d) => <option key={d._id} value={d._id}>{d.name} ({d.state?.name})</option>)}
                   </select>
                   <textarea

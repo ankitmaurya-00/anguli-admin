@@ -26,7 +26,7 @@ const CommentSection = ({ postId }) => {
       const res = await api.get(`/posts/${postId}/comments`);
       setComments(res.data.comments);
     } catch (err) {
-      toast.error('Comments load nahi hue');
+      toast.error('Failed to load comments');
     } finally {
       setLoading(false);
     }
@@ -46,7 +46,7 @@ const CommentSection = ({ postId }) => {
       setComments([res.data.comment, ...comments]);
       setNewComment('');
     } catch (err) {
-      toast.error('Comment post nahi hua');
+      toast.error('Failed to post comment');
     } finally {
       setSubmitting(false);
     }
@@ -57,7 +57,7 @@ const CommentSection = ({ postId }) => {
       await api.delete(`/comments/${commentId}`);
       setComments(comments.filter((c) => c._id !== commentId));
     } catch (err) {
-      toast.error('Comment delete nahi hua');
+      toast.error('Failed to delete comment');
     }
   };
 
@@ -70,7 +70,7 @@ const CommentSection = ({ postId }) => {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleAddComment()}
-          placeholder="Comment likhein..."
+          placeholder="Write a comment..."
           className="flex-1 border border-gray-200 rounded-full px-4 py-2 text-sm outline-none focus:border-primary-500"
         />
         <button
@@ -85,7 +85,7 @@ const CommentSection = ({ postId }) => {
       {loading ? (
         <p className="text-sm text-gray-400">Loading comments...</p>
       ) : comments.length === 0 ? (
-        <p className="text-sm text-gray-400">Koi comment nahi hai abhi. Sabse pehle comment karein!</p>
+        <p className="text-sm text-gray-400">No comments yet. Be the first to comment!</p>
       ) : (
         <div className="space-y-4">
           {comments.map((c) => (

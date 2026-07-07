@@ -27,7 +27,7 @@ const Login = () => {
     <div className="max-w-md mx-auto px-4 py-16">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <h1 className="text-2xl font-bold text-gray-800 mb-1">Welcome Back</h1>
-        <p className="text-gray-500 text-sm mb-6">Login karein apne Anguli.in account me</p>
+        <p className="text-gray-500 text-sm mb-6">Log in to your Anguli.in account</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -38,7 +38,7 @@ const Login = () => {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full mt-1 border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500"
-              placeholder="aapka@email.com"
+              placeholder="you@example.com"
             />
           </div>
           <div>
@@ -62,7 +62,7 @@ const Login = () => {
         </form>
 
         <p className="text-sm text-gray-500 mt-6 text-center">
-          Account nahi hai? <Link to="/register" className="text-primary-600 font-medium hover:underline">Register karein</Link>
+          Don't have an account? <Link to="/register" className="text-primary-600 font-medium hover:underline">Register</Link>
         </p>
       </div>
     </div>

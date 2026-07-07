@@ -55,7 +55,7 @@ const Register = () => {
     <div className="max-w-md mx-auto px-4 py-16">
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
         <h1 className="text-2xl font-bold text-gray-800 mb-1">Join Anguli.in</h1>
-        <p className="text-gray-500 text-sm mb-6">Apni community se judne ke liye account banayein</p>
+        <p className="text-gray-500 text-sm mb-6">Create an account to join your community</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -65,7 +65,7 @@ const Register = () => {
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full mt-1 border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500"
-              placeholder="Aapka naam"
+              placeholder="Your name"
             />
           </div>
           <div>
@@ -76,7 +76,7 @@ const Register = () => {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full mt-1 border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500"
-              placeholder="aapka@email.com"
+              placeholder="you@example.com"
             />
           </div>
           <div>
@@ -88,18 +88,18 @@ const Register = () => {
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               className="w-full mt-1 border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500"
-              placeholder="Kam se kam 6 characters"
+              placeholder="At least 6 characters"
             />
           </div>
 
           <div className="grid grid-cols-1 gap-3 pt-2 border-t border-gray-100">
-            <p className="text-xs text-gray-500 -mb-1">Apna location select karein (optional)</p>
+            <p className="text-xs text-gray-500 -mb-1">Select your location (optional)</p>
             <select
               value={form.state}
               onChange={(e) => setForm({ ...form, state: e.target.value })}
               className="border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500 text-sm"
             >
-              <option value="">State chunein</option>
+                  <option value="">Select state</option>
               {states.map((s) => (
                 <option key={s._id} value={s._id}>{s.name}</option>
               ))}
@@ -110,7 +110,7 @@ const Register = () => {
               disabled={!form.state}
               className="border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500 text-sm disabled:bg-gray-50"
             >
-              <option value="">District chunein</option>
+                <option value="">Select district</option>
               {districts.map((d) => (
                 <option key={d._id} value={d._id}>{d.name}</option>
               ))}
@@ -121,7 +121,7 @@ const Register = () => {
               disabled={!form.district}
               className="border border-gray-200 rounded-lg px-4 py-2.5 outline-none focus:border-primary-500 text-sm disabled:bg-gray-50"
             >
-              <option value="">Village chunein</option>
+              <option value="">Select village</option>
               {villages.map((v) => (
                 <option key={v._id} value={v._id}>{v.name}</option>
               ))}
@@ -138,7 +138,7 @@ const Register = () => {
         </form>
 
         <p className="text-sm text-gray-500 mt-6 text-center">
-          Pehle se account hai? <Link to="/login" className="text-primary-600 font-medium hover:underline">Login karein</Link>
+          Already have an account? <Link to="/login" className="text-primary-600 font-medium hover:underline">Log in</Link>
         </p>
       </div>
     </div>

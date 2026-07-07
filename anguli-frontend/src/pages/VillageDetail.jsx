@@ -28,7 +28,7 @@ const VillageDetail = () => {
   }
 
   if (!village) {
-    return <div className="max-w-4xl mx-auto px-4 py-16 text-center text-gray-500">Village nahi mila.</div>;
+    return <div className="max-w-4xl mx-auto px-4 py-16 text-center text-gray-500">Village not found.</div>;
   }
 
   return (
@@ -61,7 +61,7 @@ const VillageDetail = () => {
       <h2 className="text-lg font-semibold text-gray-800 mb-4">Recent Posts from {village.name}</h2>
       {posts.length === 0 ? (
         <p className="text-gray-500 text-sm bg-white rounded-xl border border-gray-100 p-6 text-center">
-          Is village se abhi tak koi post nahi hai. Sabse pehle post karein!
+          No posts from this village yet. Be the first to post!
         </p>
       ) : (
         <div className="space-y-4">

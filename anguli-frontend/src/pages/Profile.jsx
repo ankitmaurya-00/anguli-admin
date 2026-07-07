@@ -42,7 +42,7 @@ const Profile = () => {
   }, [tab, id]);
 
   if (loading) return <div className="max-w-3xl mx-auto px-4 py-16 text-center text-gray-500">Loading...</div>;
-  if (!profile) return <div className="max-w-3xl mx-auto px-4 py-16 text-center text-gray-500">User nahi mila.</div>;
+  if (!profile) return <div className="max-w-3xl mx-auto px-4 py-16 text-center text-gray-500">User not found.</div>;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
@@ -88,7 +88,7 @@ const Profile = () => {
 
       {tab === 'posts' && (
         posts.length === 0 ? (
-          <p className="text-gray-500 text-center py-10 bg-white rounded-xl border border-gray-100">Abhi koi post nahi hai.</p>
+          <p className="text-gray-500 text-center py-10 bg-white rounded-xl border border-gray-100">No posts yet.</p>
         ) : (
           <div className="space-y-4">
             {posts.map((p) => <PostCard key={p._id} post={p} />)}
@@ -99,7 +99,7 @@ const Profile = () => {
       {tab === 'followers' && (
         <div className="bg-white rounded-xl border border-gray-100 divide-y">
           {followers.length === 0 ? (
-            <p className="text-gray-500 text-center py-10">Koi followers nahi hain.</p>
+            <p className="text-gray-500 text-center py-10">No followers yet.</p>
           ) : followers.map((f) => (
             <Link key={f._id} to={`/profile/${f._id}`} className="flex items-center gap-3 p-4 hover:bg-gray-50">
               <img src={f.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(f.name)}&background=2563eb&color=fff`} className="w-10 h-10 rounded-full object-cover" alt={f.name} />
@@ -112,7 +112,7 @@ const Profile = () => {
       {tab === 'following' && (
         <div className="bg-white rounded-xl border border-gray-100 divide-y">
           {following.length === 0 ? (
-            <p className="text-gray-500 text-center py-10">Kisi ko follow nahi kiya hai.</p>
+            <p className="text-gray-500 text-center py-10">Not following anyone yet.</p>
           ) : following.map((f) => (
             <Link key={f._id} to={`/profile/${f._id}`} className="flex items-center gap-3 p-4 hover:bg-gray-50">
               <img src={f.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(f.name)}&background=2563eb&color=fff`} className="w-10 h-10 rounded-full object-cover" alt={f.name} />

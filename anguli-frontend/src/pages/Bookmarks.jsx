@@ -17,7 +17,7 @@ const Bookmarks = () => {
       {loading ? (
         <p className="text-gray-500 text-center py-10">Loading...</p>
       ) : bookmarks.length === 0 ? (
-        <p className="text-gray-500 text-center py-16 bg-white rounded-xl border border-gray-100">Koi saved post nahi hai.</p>
+        <p className="text-gray-500 text-center py-16 bg-white rounded-xl border border-gray-100">No saved posts.</p>
       ) : (
         <div className="space-y-4">
           {bookmarks.filter((b) => b.post).map((b) => (

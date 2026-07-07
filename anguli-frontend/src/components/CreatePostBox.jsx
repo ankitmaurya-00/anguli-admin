@@ -24,7 +24,7 @@ const CreatePostBox = ({ onPostCreated }) => {
 
   const handleSubmit = async () => {
     if (!content.trim() && files.length === 0) {
-      toast.error('Kuch likhein ya media add karein');
+      toast.error('Please write something or add media');
       return;
     }
     setPosting(true);
@@ -41,7 +41,7 @@ const CreatePostBox = ({ onPostCreated }) => {
       setPreviews([]);
       onPostCreated && onPostCreated(res.data.post);
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Post create nahi ho paya');
+      toast.error(err.response?.data?.message || 'Failed to create post');
     } finally {
       setPosting(false);
     }
@@ -52,13 +52,13 @@ const CreatePostBox = ({ onPostCreated }) => {
       <div className="flex gap-3">
         <img
           src={user?.profilePicture || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'U')}&background=2563eb&color=fff`}
-          alt="you"
+          alt={user?.name || 'Your profile'}
           className="w-10 h-10 rounded-full object-cover"
         />
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="Aapke gaon me kya ho raha hai? Share karein..."
+          placeholder="What's happening in your village? Share..."
           className="flex-1 resize-none border-0 focus:ring-0 text-gray-800 placeholder-gray-400 outline-none"
           rows={2}
         />

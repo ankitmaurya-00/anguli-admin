@@ -15,7 +15,7 @@ const PostDetail = () => {
   }, [id]);
 
   if (loading) return <div className="max-w-2xl mx-auto px-4 py-16 text-center text-gray-500">Loading...</div>;
-  if (!post) return <div className="max-w-2xl mx-auto px-4 py-16 text-center text-gray-500">Post nahi mila.</div>;
+  if (!post) return <div className="max-w-2xl mx-auto px-4 py-16 text-center text-gray-500">Post not found.</div>;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 space-y-4">

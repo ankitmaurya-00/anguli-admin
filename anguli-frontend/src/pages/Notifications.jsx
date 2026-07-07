@@ -60,7 +60,7 @@ const Notifications = () => {
       {loading ? (
         <p className="text-gray-500 text-center py-10">Loading...</p>
       ) : notifications.length === 0 ? (
-        <p className="text-gray-500 text-center py-16 bg-white rounded-xl border border-gray-100">Koi notification nahi hai.</p>
+        <p className="text-gray-500 text-center py-16 bg-white rounded-xl border border-gray-100">No notifications.</p>
       ) : (
         <div className="bg-white rounded-xl border border-gray-100 divide-y">
           {notifications.map((n) => (

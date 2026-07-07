@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     const res = await api.post('/auth/login', { email, password });
     if (res.data.user.role !== 'admin' && res.data.user.role !== 'moderator') {
-      throw new Error('Aapke paas admin panel access nahi hai');
+      throw new Error('You do not have admin panel access');
     }
     localStorage.setItem('anguli_admin_token', res.data.token);
     localStorage.setItem('anguli_admin_user', JSON.stringify(res.data.user));
