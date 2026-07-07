@@ -34,7 +34,7 @@ const EditProfile = () => {
       if (picFile) {
         const formData = new FormData();
         formData.append('image', picFile);
-        const res = await api.put('/users/me/profile-picture', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+        const res = await api.put('/users/me/profile-picture', formData);
         updateUserState({ profilePicture: res.data.profilePicture });
       }
 

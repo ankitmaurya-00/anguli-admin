@@ -6,7 +6,7 @@ if (typeof API_URL === 'string') {
   if (!API_URL.endsWith('/api')) API_URL += '/api';
 }
 
-const api = axios.create({ baseURL: API_URL });
+const api = axios.create({ baseURL: API_URL, timeout: 30000, maxContentLength: 200 * 1024 * 1024, maxBodyLength: 200 * 1024 * 1024 });
 
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {

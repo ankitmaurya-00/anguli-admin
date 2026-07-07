@@ -24,6 +24,18 @@ exports.errorHandler = (err, req, res, next) => {
     message = Object.values(err.errors).map((val) => val.message).join(', ');
   }
 
+  // Multer errors (file upload problems)
+  if (err.name === 'MulterError') {
+    statusCode = 400;
+    message = err.message || 'File upload error';
+  }
+
+  // Cloudinary signature / API errors: surface a helpful message
+  if (err.message && err.message.toLowerCase().includes('invalid signature')) {
+    statusCode = 400;
+    message = 'Cloudinary signature invalid. Check CLOUDINARY_API_SECRET and server signing logic.';
+  }
+
   res.status(statusCode).json({
     success: false,
     message,

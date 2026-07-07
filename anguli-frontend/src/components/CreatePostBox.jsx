@@ -34,7 +34,7 @@ const CreatePostBox = ({ onPostCreated }) => {
       files.forEach((f) => formData.append('media', f));
       if (user?.village) formData.append('village', user.village._id || user.village);
 
-      const res = await api.post('/posts', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+      const res = await api.post('/posts', formData);
       toast.success('Post created!');
       setContent('');
       setFiles([]);

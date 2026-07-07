@@ -9,7 +9,18 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors({ origin: [process.env.CLIENT_URL, process.env.ADMIN_URL, 'http://localhost:5173', 'http://localhost:3000'], credentials: true }));
+const allowedOrigins = [process.env.CLIENT_URL, process.env.ADMIN_URL, 'http://localhost:5173', 'http://localhost:3000'].filter(Boolean);
+
+app.use((req, res, next) => {
+  const origin = req.header('Origin');
+  if (!origin) return next();
+  if (allowedOrigins.includes(origin)) {
+    cors({ origin: origin, credentials: true })(req, res, next);
+  } else {
+    next();
+  }
+});
+app.options('*', cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
